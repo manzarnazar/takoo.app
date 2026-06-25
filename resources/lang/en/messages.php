@@ -8915,4 +8915,5 @@ Smartly or Earn. ',
   'Abastos' => 'Abastos',
   'deliveryman_deleted_successfully' => 'Deliveryman deleted successfully',
   'example' => 'Example',
+  'Takoo' => 'Takoo',
 );
