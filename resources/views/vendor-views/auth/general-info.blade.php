@@ -488,68 +488,7 @@
                             </div>
                             <div class="p-20 mb-3">
                                 <div class="card-body">
-                                    <div class="mb-3">
-                                        <h3 class="mb-2">{{ translate('CURP/RFC (SITUACION FISCAL)') }}</h3>
-                                        {{-- <p class="fz-12px mb-0">{{translate('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')}}</p> --}}
-                                    </div>
                                     <div class="row g-3">
-                                        <div class="col-md-8 col-xxl-8">
-                                            <div class="card __card bg-F8F9FC rounded p-20 h-100">
-                                                <div class="card-body">
-                                                    <div class="form-group mb-3">
-                                                        <label class="input-label mb-2 d-block title-clr fw-normal"
-                                                               for="exampleFormControlInput1">{{ translate('CURP/RFC (SITUACION FISCAL)') }}
-                                                        </label>
-                                                        <input type="text" name="tin"
-                                                               placeholder="{{ translate('Enter CURP or RFC') }}"
-                                                               class=" form-control __form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-xxl-4">
-                                            <div class="bg--secondary rounded p-20 h-100 single-document-uploaderwrap">
-                                                <div
-                                                    class="d-flex align-items-center gap-1 justify-content-between mb-20 mb-4">
-                                                    <div>
-                                                        <h4 class="mb-2 fz--14px">{{ translate('CURP/RFC Certificate (Situación Fiscal)') }}</h4>
-                                                        <p class="fz-12px mb-0">
-                                                            {{ translate('pdf, doc, jpg. File size : max 2 MB') }}</p>
-                                                    </div>
-                                                    <div class="d-flex gap-3 align-items-center">
-                                                        <button type="button" id="doc_edit_btn"
-                                                            data-default-image="{{ asset('public/assets/admin/img/doc-uploaded.png') }}"
-                                                                class="w-30px h-30 min-w-30px rounded d-flex align-items-center justify-content-center action-btn btn cmn--btn px-3 icon-btn">
-                                                            <i class="tio-edit"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div id="file-assets"
-                                                         data-picture-icon="{{ asset('public/assets/admin/img/picture.svg') }}"
-                                                         data-document-icon="{{ asset('public/assets/admin/img/document.svg') }}"
-                                                         data-blank-thumbnail="{{ asset('public/assets/admin/img/picture.svg') }}">
-                                                    </div>
-                                                    <!-- Upload box -->
-                                                    <div class="d-flex justify-content-center" id="pdf-container">
-                                                        <div class="document-upload-wrapper" id="doc-upload-wrapper">
-                                                            <input type="file" name="tin_certificate_image"
-                                                                   class="document_input"
-                                                                   accept=".doc, .pdf, .jpg, .png, .jpeg">
-                                                            <div class="textbox">
-                                                                <img width="40" height="40" class="svg"
-                                                                     src="{{ asset('public/assets/admin/img/doc-uploaded.png') }}"
-                                                                     alt="">
-                                                                <p class="fs-12 mb-0">
-                                                                    {{ translate('messages.Select_a_file_or') }} <span
-                                                                        class="font-semibold">{{ translate('messages.Drag & Drop') }}</span>
-                                                                    {{ translate('messages.here') }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="col-12">
                                             <div class="bg--secondary rounded p-20 single-document-uploaderwrap">
                                                 <div class="d-flex align-items-center gap-1 justify-content-between mb-20 mb-4">
