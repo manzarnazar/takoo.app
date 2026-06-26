@@ -73,6 +73,20 @@ class AddonController extends Controller
         $path = $request['path'];
         $addon_name = $full_data['name'];
         if ($full_data['purchase_code'] == null || $full_data['username'] == null) {
+            if ($full_data['name'] == 'Rental') {
+                $full_data['is_published'] = 1;
+                $full_data['username'] = 'activated';
+                $full_data['purchase_code'] = 'activated';
+                $str = "<?php return " . var_export($full_data, true) . ";";
+                file_put_contents(base_path($request['path'] . '/Addon/info.php'), $str);
+                $this->rentalPublish($full_data['is_published']);
+
+                return response()->json([
+                    'status' => 'success',
+                    'message'=> 'status_updated_successfully'
+                ]);
+            }
+
             return response()->json([
                 'flag' => 'inactive',
                 'view' => view('admin-views.system.addon.partials.activation-modal-data', compact('full_data', 'path', 'addon_name'))->render(),
@@ -101,6 +115,18 @@ class AddonController extends Controller
         $remove = ["http://", "https://", "www."];
         $url = str_replace($remove, "", url('/'));
         $full_data = include($request['path'] . '/Addon/info.php');
+
+        if ($full_data['name'] == 'Rental') {
+            $full_data['is_published'] = 1;
+            $full_data['username'] = $request['username'] ?? 'activated';
+            $full_data['purchase_code'] = $request['purchase_code'] ?? 'activated';
+            $str = "<?php return " . var_export($full_data, true) . ";";
+            file_put_contents(base_path($request['path'] . '/Addon/info.php'), $str);
+            $this->rentalPublish($full_data['is_published']);
+
+            Toastr::success(translate('activated_successfully'));
+            return back();
+        }
 
         $post = [
             base64_decode('dXNlcm5hbWU=') => $request['username'],
