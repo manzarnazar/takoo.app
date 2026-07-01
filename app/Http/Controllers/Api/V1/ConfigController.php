@@ -15,6 +15,7 @@ use App\Models\Module;
 use App\Models\OfflinePaymentMethod;
 use App\Models\ParcelCancellationReason;
 use App\Models\ReactPromotionalBanner;
+use App\Models\ReactHeroSlider;
 use App\Models\ReactTestimonial;
 use App\Models\Setting;
 use App\Models\SocialMedia;
@@ -702,6 +703,14 @@ class ConfigController extends Controller
             $promotional_banners[] = Helpers::get_full_url('promotional_banner', $value->image, 'public');
         }
 
+        $hero_slides = [];
+        $hero_slides_data = ReactHeroSlider::where('status', 1)->orderBy('id')->get();
+        foreach ($hero_slides_data as $value) {
+            $hero_slides[] = [
+                'image_full_url' => Helpers::get_full_url('hero_slider', $value->image, 'public'),
+            ];
+        }
+
         $zones = Zone::where('status', 1)->get();
         $zones = self::zone_format($zones);
 
@@ -710,6 +719,10 @@ class ConfigController extends Controller
             'header_sub_title' => (isset($settings['header_sub_title'])) ? $settings['header_sub_title'] : null,
             'header_tag_line' => (isset($settings['header_tag_line'])) ? $settings['header_tag_line'] : null,
             'pick_location_title' => (isset($settings['pick_location_title'])) ? $settings['pick_location_title'] : null,
+        ];
+        $heroSliderSection = [
+            'hero_slider_section_status' => (int)((isset($settings['hero_slider_section_status'])) ? $settings['hero_slider_section_status'] : 0),
+            'slides' => $hero_slides ?? [],
         ];
         $trustSection = [
             'trust_section_status' => (isset($settings['trust_section_status'])) ? (int)$settings['trust_section_status'] : 0,
@@ -896,6 +909,7 @@ class ConfigController extends Controller
 //                    'business_image_url' => $awsBaseURL.'business_image',
 //                ],
                 'hero_section' => $heroSection,
+                'hero_slider_section' => $heroSliderSection,
                 'trust_section' => $trustSection,
                 'available_zone_section' => $availableZoneSection,
                 'promotional_banner_section' => $promotionalBannerSection,

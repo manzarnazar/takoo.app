@@ -7,6 +7,10 @@
                 href="{{ route('admin.business-settings.react-landing-page-settings', 'header') }}">{{translate('Hero Section')}}</a>
             </li>
             <li class="nav-item tabs-slide_items">
+                <a class="nav-link {{ Request::is('admin/business-settings/pages/react-landing-page-settings/hero-slider') ? 'active' : '' }}"
+                href="{{ route('admin.business-settings.react-landing-page-settings', 'hero-slider') }}">{{translate('Hero Slider')}}</a>
+            </li>
+            <li class="nav-item tabs-slide_items">
                 <a class="nav-link {{ Request::is('admin/business-settings/pages/react-landing-page-settings/trust-section') ? 'active' : '' }}"
                 href="{{ route('admin.business-settings.react-landing-page-settings', 'trust-section') }}">{{translate('Trust Section')}}</a>
             </li>

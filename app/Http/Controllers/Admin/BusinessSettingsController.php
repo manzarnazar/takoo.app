@@ -23,6 +23,7 @@ use App\Models\OrderCancelReason;
 use App\Models\PharmacyItemDetails;
 use App\Models\PriorityList;
 use App\Models\ReactPromotionalBanner;
+use App\Models\ReactHeroSlider;
 use App\Models\ReactTestimonial;
 use App\Models\RefundReason;
 use App\Models\Setting;
@@ -4722,6 +4723,7 @@ class BusinessSettingsController extends Controller
         $base = 'admin-views.business-settings.landing-page-settings.';
         $views = [
             'header' => 'react-landing-page-header',
+            'hero-slider' => 'react-landing-hero-slider',
             'trust-section' => 'react-landing-page-trust-section',
             'available-zone' => 'react-landing-available-zone',
             'promotion-banner' => 'react-landing-promotion-banners',
@@ -7703,6 +7705,47 @@ class BusinessSettingsController extends Controller
         $ReactPromotionalBanner->status = $request->status;
         $ReactPromotionalBanner->save();
         Toastr::success(translate('messages.React_promotional_banner_status_updated'));
+        return back();
+    }
+
+    public function react_hero_slider_update(Request $request, $id)
+    {
+        $reactHeroSlider = ReactHeroSlider::findOrFail($id);
+        $reactHeroSlider->image = $request->has('image') ? Helpers::update(dir: 'hero_slider/', old_image: $reactHeroSlider->image, format: 'png', image: $request->file('image')) : $reactHeroSlider->image;
+        $reactHeroSlider->save();
+
+        Toastr::success(translate('messages.React_hero_slider_updated_successfully'));
+        return back();
+    }
+
+    public function react_hero_slider_destroy(ReactHeroSlider $react_hero_slider)
+    {
+        Helpers::check_and_delete('hero_slider/', $react_hero_slider->image);
+        $react_hero_slider->delete();
+        Toastr::success(translate('messages.React_hero_slider_deleted_successfully'));
+        return back();
+    }
+
+    public function react_hero_slider_store(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|max:2048',
+        ]);
+
+        $reactHeroSlider = new ReactHeroSlider();
+        $reactHeroSlider->image = Helpers::upload(dir: 'hero_slider/', format: 'png', image: $request->file('image'));
+        $reactHeroSlider->save();
+
+        Toastr::success(translate('messages.React_hero_slider_added_successfully'));
+        return back();
+    }
+
+    public function react_hero_slider_status(Request $request)
+    {
+        $reactHeroSlider = ReactHeroSlider::findOrFail($request->id);
+        $reactHeroSlider->status = $request->status;
+        $reactHeroSlider->save();
+        Toastr::success(translate('messages.React_hero_slider_status_updated'));
         return back();
     }
 

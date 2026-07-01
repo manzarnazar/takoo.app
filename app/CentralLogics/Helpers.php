@@ -3184,6 +3184,7 @@ class Helpers
             'store/cover' => asset('public/assets/admin/img/100x100/2.jpg'),
             'upload_image_4' => asset('/public/assets/admin/img/upload-4.png'),
             'promotional_banner' => asset('public/assets/admin/img/100x100/2.jpg'),
+            'hero_slider' => asset('public/assets/admin/img/900x400/img1.jpg'),
             'admin_feature' => asset('public/assets/admin/img/100x100/2.jpg'),
             'aspect_1' => asset('/public/assets/admin/img/aspect-1.png'),
             'special_criteria' => asset('public/assets/admin/img/100x100/2.jpg'),
