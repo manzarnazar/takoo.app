@@ -15,12 +15,16 @@ class LocalizationMiddleware
      */
     public function handle($request, Closure $next)
     {
-        // Check header request and determine localizaton
-        $local = ($request->hasHeader('X-localization')) ? (strlen($request->header('X-localization'))>0?$request->header('X-localization'): 'en'): 'en';
+        $local = ($request->hasHeader('X-localization'))
+            ? (strlen($request->header('X-localization')) > 0 ? $request->header('X-localization') : 'en')
+            : 'en';
 
-        // set laravel localization
+        if (in_array($local, ['undefined', 'null'], true) || ! is_dir(base_path('resources/lang/' . $local))) {
+            $local = 'en';
+        }
+
         App::setLocale($local);
-        // continue request
+
         return $next($request);
     }
 }
