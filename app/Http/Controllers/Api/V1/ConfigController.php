@@ -704,10 +704,18 @@ class ConfigController extends Controller
         }
 
         $hero_slides = [];
-        $hero_slides_data = ReactHeroSlider::where('status', 1)->orderBy('id')->get();
+        $hero_slides_data = ReactHeroSlider::with('storage')->where('status', 1)->orderBy('id')->get();
         foreach ($hero_slides_data as $value) {
+            $disk = 'public';
+            if (count($value->storage) > 0) {
+                foreach ($value->storage as $storage) {
+                    if ($storage['key'] == 'image') {
+                        $disk = $storage['value'];
+                    }
+                }
+            }
             $hero_slides[] = [
-                'image_full_url' => Helpers::get_full_url('hero_slider', $value->image, 'public'),
+                'image_full_url' => Helpers::get_full_url('hero_slider', $value->image, $disk),
             ];
         }
 
